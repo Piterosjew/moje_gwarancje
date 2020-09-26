@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+    {% if user.is_authenticated %}
+        <a href="{% url "user:logout" %}">wyloguj</a>
+    {% else %}
+        <a href="{% url "user:login" %}">zaloguj</a>
+    {% endif %}
+    Jestę indexę ;)
+{% endblock %}
