@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from django.contrib.auth.models import User
 from django.core.validators import EmailValidator
 from django.utils.translation import gettext_lazy as _
+
+from user.models import Profile
 
 
 class SignUpForm(UserCreationForm):
@@ -21,5 +22,9 @@ class SignUpForm(UserCreationForm):
     )
 
     class Meta:
-        model = User
+        model = Profile
+
+        # @todo poszukać, w jaki sposób w django "zaimportować" klasę obiektu ze "stringa"?
+        # model = settings.AUTH_USER_MODEL
+
         fields = ("username", "email", "password1", "password2")
