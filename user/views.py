@@ -2,10 +2,26 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
+from django.views.generic import CreateView
+
+from user.forms.signupform import SignUpForm
 
 
-class Login(View):
+class RegisterView(CreateView):
+    template_name = "auth/register.html"
+    form_class = SignUpForm
+
+    def form_valid(self, form):
+        messages.success(self.request, "Użytkownik zarejestrowany. Możesz się zalogować.")
+        return super(RegisterView, self).form_valid(form)
+
+    def get_success_url(self) -> str:
+        return reverse("index")
+
+
+class LoginView(View):
     template_name = "auth/login.html"
 
     def get(self, request):
@@ -25,7 +41,7 @@ class Login(View):
             return redirect("index")
 
         messages.error(request, "Nie znam takiego usera :P")
-        return redirect("login")
+        return redirect("user:login")
 
 
 def logout_view(request):
