@@ -15,4 +15,7 @@
     @todo Jak ładnie wyświetlić zdjęcie użytkownika w oparciu o ustawienia MEDIA w settings.py
     <p><img src="mediafiles/{{ user.photo }}"/></p>
     {% endcomment %}
+
+    <a href="{% url "product:new" %}">dodaj produkt</a>
+    {% block product %}{% endblock %}
 {% endblock %}
