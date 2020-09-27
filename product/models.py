@@ -9,6 +9,7 @@ class Product(models.Model):
     bought_on = models.DateField(null=False, blank=False)
     warranty_date = models.DateField(null=False, blank=False)
     description = models.TextField(null=True, blank=True)
+
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def __str__(self):

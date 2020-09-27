@@ -1,6 +1,7 @@
 from django import forms
 
 from product.models import Product
+from web.horizontalformhelper import HorizontalFormHelper
 
 
 class ProductForm(forms.ModelForm):
@@ -17,16 +18,15 @@ class ProductForm(forms.ModelForm):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
+        self.helper = HorizontalFormHelper()
         super(ProductForm, self).__init__(*args, **kwargs)
 
+        self.helper.add_submit("dodaj produkt")
+
     def save(self, commit=True):
-        if not self.instance.owner:
+        if not self.instance.owner_id:
             self.instance.owner = self.user
-        # @todo do ogarnięcia błąd związany z edycją i dodawaniem nowego produktu w kontekście użytkownika
-        # try:
-        #     pass
-        # except RelatedObjectDoesNotExist:
-        #     pass
+
         return super(ProductForm, self).save(commit=commit)
 
     class Meta:

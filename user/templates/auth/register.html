@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 {% block body %}
     {% include 'messages.html' %}
-
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="register">
-    </form>
+    {% include "form.html" %}
 {% endblock %}
