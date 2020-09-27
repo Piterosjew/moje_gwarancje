@@ -15,6 +15,9 @@ class ProductForm(forms.ModelForm):
         widget=forms.DateInput(attrs={"class": "form-control form-control-lg pr-4 shadow-none"})
     )
 
+    def __init__(self, user, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Product
         fields = ("name", "shop", "bought_on", "warranty_date")
