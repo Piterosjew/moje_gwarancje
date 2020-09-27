@@ -8,5 +8,6 @@ class Product(models.Model):
     bought_on = models.DateField(null=False, blank=False)
     warranty_date = models.DateField(null=False, blank=False)
 
+
     def __str__(self):
         return self.name

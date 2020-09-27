@@ -1,4 +1,29 @@
 {% extends "index.html" %}
 {% block product %}
-    ....
+    <div class="row">
+        <div class="col-12">
+            <table>
+                <thead>
+                <tr>
+                    <th>nazwa produktu</th>
+                    <th>nazwa sklepu</th>
+                    <th>data zakupu</th>
+                    <th>gwarancja do</th>
+                    <th>...</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in object_list %}
+                    <tr>
+                        <td>{{ element.name }}</td>
+                        <td>{{ element.shop }}</td>
+                        <td>{{ element.bought_on }}</td>
+                        <td>{{ element.warranty_date }}</td>
+                        <td><a href="{% url "product:edit" element.id %}">edytuj</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

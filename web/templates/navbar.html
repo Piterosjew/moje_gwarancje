@@ -5,6 +5,7 @@
     <a href="{% url "user:change_password" %}">Zmień hasło</a>
     <a href="{% url "user:logout" %}">wyloguj</a>
     <a href="{% url "product:new" %}">dodaj produkt</a>
+    <a href="{% url "product:list" %}">pokaż listę produktów</a>
 {% else %}
     <a href="{% url "user:login" %}">zaloguj</a>
     <a href="{% url "user:register" %}">rejestruj</a>

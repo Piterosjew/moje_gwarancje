@@ -1,8 +1,37 @@
-from django.views.generic import CreateView
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin as BaseLoginRequiredMixin
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.views.generic import CreateView, ListView, UpdateView
 
 from product.forms import ProductForm
+from product.models import Product
 
 
-class AddView(CreateView):
+class LoginRequiredMixin(BaseLoginRequiredMixin):
+    def get_login_url(self):
+        return reverse("user:login")
+
+
+class AddView(LoginRequiredMixin, CreateView):
     template_name = "product/add.html"
     form_class = ProductForm
+
+    def form_valid(self, form):
+        form.save()
+        return redirect(reverse('index'))
+
+
+class ProductListView(LoginRequiredMixin, ListView):
+    template_name = "product/list.html"
+    model = Product
+
+
+class EditProductView(LoginRequiredMixin, UpdateView):
+    template_name = "product/add.html"
+    form_class = ProductForm
+    model = Product
+
+    def get_success_url(self):
+        messages.success(request=self.request, message="Produkt zaktualizowany")
+        return reverse("product:list")
