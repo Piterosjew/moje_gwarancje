@@ -1,0 +1,11 @@
+{% if user.is_authenticated %}
+    Witaj {{ user.username }}
+    <img style="height:50px; width:50px; border-radius:50%; margin:auto" src="{{ user.avatar }}" alt="Photo">,
+
+    <a href="{% url "user:change_password" %}">Zmień hasło</a>
+    <a href="{% url "user:logout" %}">wyloguj</a>
+    <a href="{% url "product:new" %}">dodaj produkt</a>
+{% else %}
+    <a href="{% url "user:login" %}">zaloguj</a>
+    <a href="{% url "user:register" %}">rejestruj</a>
+{% endif %}
