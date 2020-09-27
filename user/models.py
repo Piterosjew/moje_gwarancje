@@ -18,6 +18,10 @@ def user_photo_name(instance, filename):
 class Profile(AbstractUser):
     photo = models.ImageField(blank=True, null=True, upload_to=user_photo_name)
 
+    @property
+    def avatar(self):
+        return f"{settings.MEDIA_URL}{self.photo}"
+
     def image_tag(self):
         return mark_safe('<img src="%s/%s" width="100px" />' % (settings.MEDIA_URL, str(self.photo)))
 
